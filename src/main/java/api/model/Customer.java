@@ -1,23 +1,15 @@
-package api.entity;
+package api.model;
 
-import api.model.Order;
+import javax.persistence.Column;
 
-import javax.persistence.*;
-import java.util.List;
-@Entity
-@Table(name = "customer")
-public class CustomerEntity {
-    @Id
-    @Column(name = "customer_id")
+public class Customer {
     private Integer customerId;
-    @Column(name = "customer_name")
+
     private String customerName;
-    @Column(name = "customer_phone")
+
     private Long customerPhone;
-    @Column(name = "customer_email")
+
     private String customerEmail;
-    @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-    private List<OrderEntity> orders;
 
     public Integer getCustomerId() {
         return customerId;
@@ -49,13 +41,5 @@ public class CustomerEntity {
 
     public void setCustomerEmail(String customerEmail) {
         this.customerEmail = customerEmail;
-    }
-
-    public List<OrderEntity> getOrders() {
-        return orders;
-    }
-
-    public void setOrders(List<OrderEntity> orders) {
-        this.orders = orders;
     }
 }

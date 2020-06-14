@@ -8,7 +8,15 @@ public class Order {
     private String status;
     private String recipientAddress;
     private List<CatalogItem> items; //in practical scenario, model need not be same as entity
+    private Customer customer;
 
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
 
     public List<CatalogItem> getItems() {
         return items;

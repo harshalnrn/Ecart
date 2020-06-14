@@ -3,6 +3,7 @@ package api.service;
 import api.entity.CatalogItemEntity;
 import api.entity.OrderEntity;
 import api.model.CatalogItem;
+import api.model.Customer;
 import api.model.Order;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,7 @@ public class OrderService {
             order = new Order();
 
             List<CatalogItem> itemList=new LinkedList<>();
+            Customer customer=new Customer();
             BeanUtils.copyProperties(orderEntity, order); //here extra fields of model shall have null value
             //override 'list' field of order, and populate itemlist of order. (note :ignore cyclic relationship while populating)
             for (CatalogItemEntity entity:orderEntity.getItems()) {
@@ -42,6 +44,13 @@ public class OrderService {
 
             }
             order.setItems(itemList);
+customer.setCustomerId(orderEntity.getCustomer().getCustomerId());
+customer.setCustomerEmail(orderEntity.getCustomer().getCustomerEmail());
+customer.setCustomerName(orderEntity.getCustomer().getCustomerName());
+customer.setCustomerPhone(orderEntity.getCustomer().getCustomerPhone());
+order.setCustomer(customer);
+
+
         }
         //if api.model null custom api.exception to be thrown
         return order;

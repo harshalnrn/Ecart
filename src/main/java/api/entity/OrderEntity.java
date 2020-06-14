@@ -21,8 +21,19 @@ public class OrderEntity {
     private String status;
     @Column(name = "recipientaddress")
     private String recipientAddress;
+    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @JoinColumn(name = "customer_id",referencedColumnName = "customer_id")
+    private CustomerEntity customer;
     @ManyToMany(mappedBy = "orders")
     private List<CatalogItemEntity> items;
+
+    public CustomerEntity getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(CustomerEntity customer) {
+        this.customer = customer;
+    }
 
     public List<CatalogItemEntity> getItems() {
         return items;
